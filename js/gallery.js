@@ -87,18 +87,19 @@ function createMarkup(images) {
 
 gallery.insertAdjacentHTML('beforeend', createMarkup(images));
 
-gallery.addEventListener('click', handelGallery);
+gallery.addEventListener('click', handleClick);
 
-function handelGallery(event) {
+function handleClick(event) {
   event.preventDefault();
-  if (event.target.nodeName !== 'IMG') {
+  if (!event.target.classList.contains('gallery-image')) {
     return;
   }
 
   basicLightbox
     .create(
-      `
-		<img width="1400" height="900" src="${event.target.dataset.source}">
+      `<div class="modal">
+        <img src="${event.target.dataset.source}" alt="${event.target.alt}" />
+      </div>
 	`
     )
     .show();
